@@ -35,20 +35,18 @@ import "fetch-polyfill";
 
 import callback from './modules/callback';
 import getConsult from './modules/getConsult';
-import getCount from './modules/getCount';
 import getDiscount from './modules/getDiscount';
 import accordion from './modules/accordion';
 import getCheckList from './modules/getCheckList';
 import calc from './modules/calc';
 import getMore from './modules/getMore';
 import sendForm from './modules/sendForm';
+import formValidation from './modules/formValidation';
 
 // Модальное окно 1
 callback();
 // Отправка формы - заказать консультацию
 getConsult();
-// Отправка формы - получить расчет
-getCount();
 // Модальное окно 2 — Заказать со скидкой
 getDiscount();
 // Аккордеон
@@ -61,3 +59,5 @@ calc();
 getMore();
 // Модальное окно 3 + отправка формы
 sendForm();
+// Валидация форм
+formValidation();
