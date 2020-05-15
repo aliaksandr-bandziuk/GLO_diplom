@@ -7,17 +7,9 @@
     "dev": "webpack-dev-server --open --mode=development",
     "build": "webpack --mode=production"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aliaksandr-bandziuk/GLO_diplom.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aliaksandr-bandziuk/GLO_diplom/issues"
-  },
-  "homepage": "https://github.com/aliaksandr-bandziuk/GLO_diplom#readme",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
