@@ -8,7 +8,9 @@ const getConsult = () => {
         loadMessage = 'Идет отправка ваших данных...',
         successMessage = 'Ваши данные отправлены!';
 
-    const forms = document.querySelectorAll('form');
+    const forms = document.querySelectorAll('form'),
+        formMessage = document.querySelector('.director-form'),
+        inputMessage = formMessage.querySelector('input');
 
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 2rem;';
@@ -31,6 +33,12 @@ const getConsult = () => {
             formData.forEach((val, key) => {
                 body[key] = val;
             });
+
+            if(form.classList.contains('capture-form')){
+                console.log('yes');
+                body['message'] = inputMessage.value;
+            }
+
             postData(body)
                 .then(response => {
                     if (response.status !== 200) {
