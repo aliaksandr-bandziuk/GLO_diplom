@@ -8,7 +8,7 @@ const accordion = () => {
       collapses = accordionTwo.querySelectorAll('.collapse');
         
          panelHeadings.forEach((panelHeading, indexPanelHeading) => {
-            // panelHeading.style.cursor = "pointer";
+            panelHeading.style.cursor = "pointer";
 
             panelHeading.addEventListener('click', (event) => {
                event.preventDefault();
