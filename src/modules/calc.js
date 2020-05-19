@@ -1,7 +1,6 @@
-import calcData from './calcData';
+'use strict';
 
 const calc = () => {
-   'use strict';
    const onoffswitchCheckbox = document.querySelector('.onoffswitch-checkbox'),
    formControl = document.querySelectorAll('.form-control'),
    panelBody = document.getElementById('collapseTwo'),
@@ -72,7 +71,7 @@ const calc = () => {
            }
        });
        
-   });
+   });  
 };
 
 export default calc;
