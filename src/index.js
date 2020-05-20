@@ -47,7 +47,7 @@ import formValidation from "./modules/formValidation";
 // Модальное окно 1
 callback();
 // Отправка формы - заказать консультацию
-// getConsult();
+getConsult();
 // Модальное окно 2 — Заказать со скидкой
 getDiscount();
 // Аккордеон
