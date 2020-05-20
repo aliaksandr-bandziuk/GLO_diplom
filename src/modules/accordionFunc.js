@@ -44,5 +44,4 @@ const accordionFunc = () => {
   });
  });
 };
-
 export default accordionFunc;
