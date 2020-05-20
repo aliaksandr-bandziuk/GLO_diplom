@@ -62,4 +62,4 @@ const getConsult = () => {
 
 };
 
-export default getConsult;
+// export default getConsult;

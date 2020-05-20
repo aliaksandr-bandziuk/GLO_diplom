@@ -180,12 +180,12 @@ const calc = (price = 10000) => {
                         () => { 
                         statusMessage.textContent = successMessage;
                         setTimeout(() => {statusMessage.textContent = ''}, 5000);
-                        }, 
+                        },
                         (error) => {
                         statusMessage.textContent = errorMessage;
                         setTimeout(() => {statusMessage.textContent = ''}, 2000);
                         console.error(error);
-                        }); 
+                        });
                         clearInput();             
         });
 
