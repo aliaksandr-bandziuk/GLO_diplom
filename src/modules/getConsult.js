@@ -10,6 +10,7 @@ const getConsult = () => {
   const forms = document.querySelectorAll("form");
   const formMessage = document.querySelector(".director-form");
 
+  
   const myonoffswitch = document.getElementById("myonoffswitch");
   const myonoffswitchTwo = document.getElementById("myonoffswitch-two");
   const calcResult = document.getElementById("calc-result");
