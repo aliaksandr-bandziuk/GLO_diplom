@@ -1,73 +1,73 @@
 'use strict';
 
 const calc = () => {
-   const onoffswitchCheckbox = document.querySelector('.onoffswitch-checkbox'),
+   const onoffCheckbox = document.querySelector('.onoffswitch-checkbox'),
    formControl = document.querySelectorAll('.form-control'),
-   panelBody = document.getElementById('collapseTwo'),
-   contentPanelBody = panelBody.children[0].children,
+   collapseTwo = document.getElementById('collapseTwo'),
+   insideCollapseTwo = collapseTwo.children[0].children,
    accordion = document.querySelector('#accordion'),
    calcResult = document.querySelector('#calc-result'),
-   myonoffswitchTwo = document.querySelector('#myonoffswitch-two'),
-   distanceInput = document.querySelector('#collapseFour').children[0].children[1],
-   distanceBtn = document.querySelector('#collapseFour').children[0].children[2];
+   onoffSwitchTwo = document.querySelector('#myonoffswitch-two'),
+   inputDistance = document.querySelector('#collapseFour').children[0].children[1],
+   buttonDistance = document.querySelector('#collapseFour').children[0].children[2];
    let maintotal = 0;
 
    accordion.addEventListener('click', () => {
-       if (onoffswitchCheckbox.checked){
-           contentPanelBody[5].classList.add('hidden');
-           contentPanelBody[4].classList.add('hidden');
-           contentPanelBody[3].classList.add('hidden');
+       if (onoffCheckbox.checked){
+           insideCollapseTwo[5].classList.add('hidden');
+           insideCollapseTwo[4].classList.add('hidden');
+           insideCollapseTwo[3].classList.add('hidden');
            
            let total = 10000;
            maintotal = total;
-           if (contentPanelBody[1].children[1].value === '2 метра'){
+           if (insideCollapseTwo[1].children[1].value === '2 метра'){
                maintotal = total + (total * 0.2);
            }  
-           if (contentPanelBody[2].children[1].value === '2 штуки'){
+           if (insideCollapseTwo[2].children[1].value === '2 штуки'){
                maintotal += (total * 0.3);
-           }   else if (contentPanelBody[2].children[1].value === '3 штуки'){
+           }   else if (insideCollapseTwo[2].children[1].value === '3 штуки'){
                maintotal += (total * 0.5);
            }
-           if (myonoffswitchTwo.checked){
+           if (onoffSwitchTwo.checked){
                maintotal += 1000;
            }
        }   else{
-           contentPanelBody[5].classList.remove('hidden');
-           contentPanelBody[4].classList.remove('hidden');
-           contentPanelBody[3].classList.remove('hidden');
+           insideCollapseTwo[5].classList.remove('hidden');
+           insideCollapseTwo[4].classList.remove('hidden');
+           insideCollapseTwo[3].classList.remove('hidden');
            let total = 15000;
            maintotal = total;
-           if (contentPanelBody[1].children[1].value === '2 метра'){
+           if (insideCollapseTwo[1].children[1].value === '2 метра'){
                maintotal += (total * 0.2);
            }  
-           if (contentPanelBody[2].children[1].value === '2 штуки'){
+           if (insideCollapseTwo[2].children[1].value === '2 штуки'){
                maintotal += (total * 0.3);
-           }   else if (contentPanelBody[2].children[1].value === '3 штуки'){
+           }   else if (insideCollapseTwo[2].children[1].value === '3 штуки'){
                maintotal += (total * 0.5);
            }
-           if (contentPanelBody[4].children[1].value === '2 метра'){
+           if (insideCollapseTwo[4].children[1].value === '2 метра'){
                maintotal += (total * 0.2);
            }  
-           if (contentPanelBody[5].children[1].value === '2 штуки'){
+           if (insideCollapseTwo[5].children[1].value === '2 штуки'){
                maintotal += (total * 0.3);
-           }   else if (contentPanelBody[5].children[1].value === '3 штуки'){
+           }   else if (insideCollapseTwo[5].children[1].value === '3 штуки'){
                maintotal += (total * 0.5);
            }
-           if (myonoffswitchTwo.checked){
+           if (onoffSwitchTwo.checked){
                maintotal += 2000;
            }
 
        }
        calcResult.value = maintotal;
-       if (distanceInput.value === ''){
-           distanceBtn.disabled = true;
+       if (inputDistance.value === ''){
+           buttonDistance.disabled = true;
        }
-       distanceInput.addEventListener('input', () => {
-           distanceInput.value = distanceInput.value.replace (/[^0-9]/, '');
-           if (distanceInput.value === ''){
-               distanceBtn.disabled = true;
+       inputDistance.addEventListener('input', () => {
+           inputDistance.value = inputDistance.value.replace (/[^0-9]/, '');
+           if (inputDistance.value === ''){
+               buttonDistance.disabled = true;
            }   else{
-               distanceBtn.disabled = false;
+               buttonDistance.disabled = false;
            }
        });
        
