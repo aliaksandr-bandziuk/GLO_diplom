@@ -1,77 +1,212 @@
-"use strict";
+'use strict';
 
-const calc = () => {
-   const onoffCheckbox = document.querySelector('.onoffswitch-checkbox'),
-   formControl = document.querySelectorAll('.form-control'),
-   collapseTwo = document.getElementById('collapseTwo'),
-   insideCollapseTwo = collapseTwo.children[0].children,
-   accordion = document.querySelector('#accordion'),
-   calcResult = document.querySelector('#calc-result'),
-   onoffSwitchTwo = document.querySelector('#myonoffswitch-two'),
-   inputDistance = document.querySelector('#collapseFour').children[0].children[1],
-   buttonDistance = document.querySelector('#collapseFour').children[0].children[2];
-   let maintotal = 0;
+const calc = (price = 10000) => {
+    const accordion = document.querySelector('#accordion');
+    const collapse = accordion.querySelectorAll('.panel-collapse');
+    const collapsedBtn = accordion.querySelectorAll('.panel-heading');
+    const constructBtn = accordion.querySelectorAll('.construct-btn');
 
-   accordion.addEventListener('click', () => {
-       if (onoffCheckbox.checked){
-           insideCollapseTwo[5].classList.add('hidden');
-           insideCollapseTwo[4].classList.add('hidden');
-           insideCollapseTwo[3].classList.add('hidden');
-           
-           let total = 10000;
-           maintotal = total;
-           if (insideCollapseTwo[1].children[1].value === '2 метра'){
-               maintotal = total + (total * 0.2);
-           }  
-           if (insideCollapseTwo[2].children[1].value === '2 штуки'){
-               maintotal += (total * 0.3);
-           }   else if (insideCollapseTwo[2].children[1].value === '3 штуки'){
-               maintotal += (total * 0.5);
-           }
-           if (onoffSwitchTwo.checked){
-               maintotal += 1000;
-           }
-       }   else{
-           insideCollapseTwo[5].classList.remove('hidden');
-           insideCollapseTwo[4].classList.remove('hidden');
-           insideCollapseTwo[3].classList.remove('hidden');
-           let total = 15000;
-           maintotal = total;
-           if (insideCollapseTwo[1].children[1].value === '2 метра'){
-               maintotal += (total * 0.2);
-           }  
-           if (insideCollapseTwo[2].children[1].value === '2 штуки'){
-               maintotal += (total * 0.3);
-           }   else if (insideCollapseTwo[2].children[1].value === '3 штуки'){
-               maintotal += (total * 0.5);
-           }
-           if (insideCollapseTwo[4].children[1].value === '2 метра'){
-               maintotal += (total * 0.2);
-           }  
-           if (insideCollapseTwo[5].children[1].value === '2 штуки'){
-               maintotal += (total * 0.3);
-           }   else if (insideCollapseTwo[5].children[1].value === '3 штуки'){
-               maintotal += (total * 0.5);
-           }
-           if (onoffSwitchTwo.checked){
-               maintotal += 2000;
-           }
+    const totalValue = document.querySelector('#calc-result');
+    const titletext = document.querySelectorAll('.title-text')[1];
+    const selectField1 = document.querySelectorAll('.expand')[0];
+    const selectField2 = document.querySelectorAll('.expand')[1];
+    
+    const inputDist = document.querySelector('.panel-body > input');
+    const selectBox3 = document.querySelector('#selectBox3');
+    const selectBox4 = document.querySelector('#selectBox4');
+    const selectField3 = document.querySelectorAll('.expand')[2];
+    const selectField4 = document.querySelectorAll('.expand')[3];
 
-       }
-       calcResult.value = maintotal;
-       if (inputDistance.value === ''){
-           buttonDistance.disabled = true;
-       }
-       inputDistance.addEventListener('input', () => {
-           inputDistance.value = inputDistance.value.replace (/[^0-9]/, '');
-           if (inputDistance.value === ''){
-               buttonDistance.disabled = true;
-           }   else{
-               buttonDistance.disabled = false;
-           }
-       });
+    const calcBlock = document.querySelector('.panel-group');
+    const checkBoxOne = document.querySelector('#myonoffswitch');
+    const checkBoxTwo = document.querySelector('#myonoffswitch-two');
+ 
+    const onoffswitchLabelOne = document.querySelector('.onoffswitch-inner');
+    const onoffswitchLabelTwo = document.querySelector('#innerTwo');
+    const calcBtn = document.querySelector('#calcBtn');
+    const popupCall = document.querySelector('.popup-call');
+    const formDiscount = document.querySelector('#formDiscount');
+    const inputName = document.querySelector('#name_1');
+    let total = 1;
+    let typeValue1, typeValue2, typeValue3, typeValue4;
+
+     //переменные с сообщениями,которые мы будем передавать пользователю
+     const errorMessage = 'Что-то пошло не так...',
+     loadMessage = 'Загрузка...',
+     successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+
+     const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 2rem;';
+
+    //очистка input-ов
+    const clearInput = () => {
+        document.querySelectorAll('input').forEach((item) => {
+            item.value = ''; 
+        });
+    };
+//Валидация вводимых данных
+    inputName.addEventListener('input', (event) => {
+        event.target.value = event.target.value.replace(/[^а-я ]/gi, '');
+        });  
+
+    calcBlock.addEventListener('change', (event) => {
+        const target = event.target;
+            if(target.matches('select') || target.matches('input') || target.matches('.onoffswitch-inner')) {
+            countSum();
+            }
+    });
+     
+    onoffswitchLabelOne.addEventListener('click', () => {
+        if(checkBoxOne.checked === true) {
+            checkBoxOne.removeAttribute('checked');
+            checkBoxOne.setAttribute("unchecked", 'unchecked');
+            titletext.style.display = 'block';
+            selectBox3.style.display = 'block';
+            selectBox4.style.display = 'block';
+        } else {
+            checkBoxOne.removeAttribute('unchecked');
+             checkBoxOne.setAttribute('checked', 'checked');
+             titletext.style.display = 'none';
+             selectBox3.style.display = 'none';
+             selectBox4.style.display = 'none';
+        }
+    });
+
+    onoffswitchLabelTwo.addEventListener('click', () => {
+        if(checkBoxTwo.checked === true) {
+            checkBoxTwo.removeAttribute('checked');
+            checkBoxTwo.setAttribute("unchecked", 'unchecked');
+        } else {
+            checkBoxTwo.removeAttribute('unchecked');
+             checkBoxTwo.setAttribute('checked', 'checked');
+        }
+    });
+
+    const openTab = () => {
+        
+        const toggleCollapse = (index) => {
+            for(let i = 0; i < collapse.length; i++) {
+                if(index === i) {
+                    collapse[i].classList.add('in');
+                }else {
+                    collapse[i].classList.remove('in');
+                }
+                countSum();
+            }
+        };
+
+//Добалвляем класс collapse-in элементу,на который нажали
+        accordion.addEventListener('click', (event) => {
+                event.preventDefault();
+                let target = event.target;
+          
+                while(target !== accordion) {
+                if(target.matches('.panel-heading')) {
+                    collapsedBtn.forEach((item, i) => {
+                        if(item === target) {
+                            toggleCollapse(i);
+                            }
+                    });
+                        return;
+                    } else if(target.matches('.construct-btn')){
+                        constructBtn.forEach((item, i) => {
+                            if(item === target){
+                                toggleCollapse(i + 1);
+                            }
+                        });
+                    return;
+                    }
+                    target = target.parentNode;
+                }         
+        });       
+    };
+
+    openTab();
+
+    const countSum = () => {
+        
+        typeValue1 = selectField1.options[selectField1.selectedIndex].value;
+            typeValue2 = selectField2.options[selectField2.selectedIndex].value;
+            typeValue3 = selectField3.options[selectField3.selectedIndex].value;
+            typeValue4 = selectField4.options[selectField4.selectedIndex].value;
+
+//однокамерный септик   
+        if(checkBoxOne.hasAttribute('checked')) {
+            total = price * typeValue1 * typeValue2;
+
+            if(checkBoxTwo.hasAttribute('checked')) {
+                total += 1000; 
+            }
+//двухкамерный септик
+        } else {
+            total = (price + 5000) * typeValue1 * typeValue2 * typeValue3 * typeValue4;
+
+            if(checkBoxTwo.hasAttribute('checked')) {
+                total += 2000; 
+            }   
+        }
+//вывод на страницу
+        totalValue.placeholder = total;
+    };
+
+    calcBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        popupCall.style.display = 'block'; 
+    });
        
-   });  
+        formDiscount.addEventListener('submit', (event) => {
+            //отменяем стандартное поведение,чтобы страница не перезагружалась после кнопки submit
+                event.preventDefault();
+                formDiscount.appendChild(statusMessage);
+                //когда состояние readyState поменялось с 0 появилось сообщение Загрузка...
+                statusMessage.textContent = loadMessage;
+                            
+                const formData = new FormData(formDiscount);
+                //Если серверу надо передать в JSON-формате,извлекаем данные из formData,переберем данные с цикле for of
+                let body = {};
+                body.total_summ = total;
+                body.value1 = typeValue1;
+                body.value2 = typeValue2;
+                body.value3 = typeValue3;
+                body.value4 = typeValue4;
+                body.input_distant = inputDist.value;
+                //с помощью метода .entries вытащим значения из formData.Получаем массив
+                for(let val of formData.entries()) {
+                //Добавляем полученные данные в body. Значения с ключом.Получаем объект
+                    body[val[0]] = val[1];                   
+                }
+                 //в postData передаем body, callback-фун-ию(outputData-оповещение пользователя) 
+                postData(body, 
+                        () => { 
+                        statusMessage.textContent = successMessage;
+                        setTimeout(() => {statusMessage.textContent = ''}, 5000);
+                        }, 
+                        (error) => {
+                        statusMessage.textContent = errorMessage;
+                        setTimeout(() => {statusMessage.textContent = ''}, 2000);
+                        console.error(error);
+                        }); 
+                        clearInput();             
+        });
+
+        //функция обращения к серверу
+    const postData = (body, outputData, errorData) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+             if(request.readyState !== 4) {
+                 return;
+            }
+            if(request.status === 200) {
+                outputData();
+            } else {
+                errorData(request.status);
+            }
+         });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+    
+        request.send(JSON.stringify(body));
+    };
 };
 
 export default calc;

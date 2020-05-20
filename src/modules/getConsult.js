@@ -11,9 +11,9 @@ const getConsult = () => {
     const forms = document.querySelectorAll('form'),
         formMessage = document.querySelector('.director-form'),
         // добавил
-        calcMessage = document.querySelector('.panel-collapse'),
+        // calcMessage = document.querySelector('.panel-collapse'),
         // добавил
-        calcInpuetMessage = calcMessage.querySelector('input'),
+        // calcInpuetMessage = calcMessage.querySelector('input'),
         inputMessage = formMessage.querySelector('input');
 
     const statusMessage = document.createElement('div');
@@ -41,7 +41,7 @@ const getConsult = () => {
             if(form.classList.contains('capture-form')){
                 body['message'] = inputMessage.value;
                 //добавил
-                body['message'] = calcInpuetMessage.value;
+                // body['message'] = calcInpuetMessage.value;
             }
 
             postData(body)
