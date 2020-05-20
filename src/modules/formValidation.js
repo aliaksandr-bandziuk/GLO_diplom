@@ -7,7 +7,7 @@ const formValidation = () => {
 
   phoneUser.forEach((item) => {
     item.addEventListener("input", (event) => {
-      event.target.value = event.target.value.replace(/[^0-9+]/g, "");
+      event.target.value = event.target.value.replace(/(\d?)(\d{3})(\d{3})(\d{2})(\d{2})/g); ///[^0-9+]\d{11}/g, ""
     });
   });
 
