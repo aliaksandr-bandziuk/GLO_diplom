@@ -29,7 +29,9 @@ const accordionFunc = () => {
       collapsesOne.forEach((item) => {
         item.classList.remove("in");
       });
-      collapsesOne[indexBtn + 1].classList.add("in");
+      if (indexBtn !== 3) {
+        collapsesOne[indexBtn + 1].classList.add("in");
+      }
     });
   });
 
