@@ -3,13 +3,25 @@
 const formValidation = () => {
   const phoneUser = document.querySelectorAll(".phone-user"),
     nameUser = document.getElementsByName("user_name"),
-    userQuest = document.getElementsByName("user_quest");
+    userQuest = document.getElementsByName("user_quest"),
+    mainFormBtn = document.querySelector('.main-form-btn');
 
   phoneUser.forEach((item) => {
     item.addEventListener("input", (event) => {
       event.target.value = event.target.value.replace(/[^\d\+]/g, '');
     });
   });
+
+  // phoneUser.forEach((item) => {
+  //   item.addEventListener("keyup", (event) => {
+  //   let length = this.value.length;
+  //       if(length > 10){
+  //         mainFormBtn.disabled = 'false';
+  //       } else{
+  //         mainFormBtn.disabled = 'true';
+  //       }
+  //     });
+  // });
 
   nameUser.forEach((item) => {
     item.addEventListener("input", (event) => {
